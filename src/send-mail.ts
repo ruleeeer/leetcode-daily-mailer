@@ -14,7 +14,7 @@ async function sendTodayQuestion() {
                 from: fromEMail,
                 to: toEmail,
                 subject: todayQuestion.translatedTitle,
-                text: todayQuestion.translatedContent
+                html: todayQuestion.translatedContent
             };
             return sendMail(transporter, mailOptions);
         })
