@@ -8,12 +8,13 @@ const toEmail = getEnvironmentVariableWithErr("TO_EMAIL");
 
 
 async function sendTodayQuestion() {
+    const date = new Date();
     return getTodayQuestion()
         .then(todayQuestion => {
             const mailOptions = {
                 from: fromEMail,
                 to: toEmail,
-                subject: todayQuestion.translatedTitle,
+                subject: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${todayQuestion.translatedTitle}`,
                 html: todayQuestion.translatedContent
             };
             return sendMail(transporter, mailOptions);
