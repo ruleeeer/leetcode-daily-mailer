@@ -40,7 +40,7 @@ async function sendTodayQuestion() {
             } = todayQuestion;
             const html = util.format(htmlTemplate, number, title, difficulty, translatedContent, titleSlug, titleSlug, projectUrl, projectUrl)
             const date = new Date();
-            const currentDateStr = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+            const currentDateStr = date.toISOString().slice(0, 10);
             const mailOptions = {
                 from: fromEMail,
                 to: toEmail,
