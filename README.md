@@ -33,7 +33,7 @@
 ## 如何调试
 1. clone项目
 2. 在本地设置环境变量,在项目根目录创建`.env`文件,在`.env`文件中设置必要的环境变量
-3. 根据https://vercel.com/docs/cli安装`vercel cli`工具
+3. 根据 https://vercel.com/docs/cli 安装`vercel cli`工具
 4. 使用`vercel dev`启动项目
 5. 访问`https://localhost:3000/api/send`
 
