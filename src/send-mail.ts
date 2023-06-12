@@ -1,21 +1,51 @@
 import {getTodayQuestion} from 'leetcode-daily-question'
+import * as util from "util";
 
 const nodemailer = require('nodemailer');
 
 let transporter = createTransporter();
 const fromEMail = getEnvironmentVariableWithErr("FROM_EMAIL");
 const toEmail = getEnvironmentVariableWithErr("TO_EMAIL");
-
+const projectUrl = "https://github.com/ruleeeer/leetcode-daily-mailer";
+const htmlTemplate = `  <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+            </head>
+            <body>
+              <h4>%s：%s</h4>
+              <p>难度：%s</p>
+              <div>%s</div>
+              <p>
+                原题链接：<a href="https://leetcode-cn.com/problems/%s">https://leetcode-cn.com/problems/%s</a>
+              </p>
+              </br>
+              </br>
+              <HR>
+              <p>
+                github：<a href="%s">%s</a>
+              </p>
+            </body>
+            </html>`;
 
 async function sendTodayQuestion() {
-    const date = new Date();
     return getTodayQuestion()
         .then(todayQuestion => {
+            const {
+                titleSlug,
+                questionFrontendId: number,
+                translatedTitle: title,
+                difficulty,
+                translatedContent
+            } = todayQuestion;
+            const html = util.format(htmlTemplate, number, title, difficulty, translatedContent, titleSlug, titleSlug, projectUrl, projectUrl)
+            const date = new Date();
+            const currentDateStr = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
             const mailOptions = {
                 from: fromEMail,
                 to: toEmail,
-                subject: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${todayQuestion.translatedTitle}`,
-                html: todayQuestion.translatedContent
+                subject: `${currentDateStr} Leetcode每日一题: ${title}`,
+                html: html
             };
             return sendMail(transporter, mailOptions);
         })
