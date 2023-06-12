@@ -67,7 +67,7 @@ function sendMail(transporter, mailOptions) {
 
 function createTransporter() {
 // read environment variables
-    const host = getEnvironmentVariableWithErr("EMAIL_HOST");
+    const host = getEnvironmentVariableWithErr("SMTP_EMAIL_HOST");
     const smtpPort = getEnvironmentVariableWithDefault("SMTP_PORT", "465")
     const authUser = getEnvironmentVariableWithErr("AUTH_USER");
     const authPass = getEnvironmentVariableWithErr("AUTH_PASS")
