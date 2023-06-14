@@ -8,11 +8,13 @@ export default async function send(
 
     const syncMail = async () => {
         return sendTodayQuestion()
-            .then(info => {
-                return "success";
-            }).catch(err => {
-                return "failed"
-            })
+            .then(results => {
+                console.log(results)
+                return {
+                    success: results.filter(p => p.status === 'fulfilled').map(p => p.value.to),
+                    failed: results.filter(p => p.status === 'rejected').map(p => p.value.to)
+                }
+            });
     }
     return await within(
         syncMail,

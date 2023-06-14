@@ -8,14 +8,14 @@
    ,你可以直接点击按扭部署自己的服务[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ruleeeer/leetcode-daily-mailer&env=FROM_EMAIL&env=TO_EMAIL&env=SMTP_EMAIL_HOST&env=SMTP_PORT&env=AUTH_USER&env=AUTH_USER&project-name=leetcode-daily-mailer&repository-name=leetcode-daily-mailer)
 2. 设置必须的环境变量
 
-   | env_name       | desc           | example           | require | default |
-   |----------------|----------------|-------------------|---------|---------|
-   | FROM_EMAIL     | 发送每日一题的邮箱      | send@mail.com     | true    |         |
-   | TO_EMAIL       | 接收每日一题的邮箱      | receiver@mail.com | true    |         |
-   | SMTP_EMAIL_HOST| 发送方所在邮箱的SMTP域名 | smtp.gmail.com    | true    |         |
-   | SMTP_PORT| 发送方所在邮箱的SMTP端口 | 465               | false   | 465     |
-   | AUTH_USER| 发送方所在邮箱的帐号     | send@mail.com     | true    | |
-   | AUTH_PASS| 发送方所在邮箱的密码     | password          | true    | |
+   | env_name       | desc                     | example                               | require | default |
+   |----------------|--------------------------|---------------------------------------|---------|---------|
+   | FROM_EMAIL     | 发送每日一题的邮箱                | send@mail.com                         | true    |         |
+   | TO_EMAIL       | 接收每日一题的邮箱(支持多个,使用英文逗号分隔) | receiver1@mail.com,receiver2@mail.com | true    |         |
+   | SMTP_EMAIL_HOST| 发送方所在邮箱的SMTP域名           | smtp.gmail.com                        | true    |         |
+   | SMTP_PORT| 发送方所在邮箱的SMTP端口           | 465                                   | false   | 465     |
+   | AUTH_USER| 发送方所在邮箱的帐号               | send@mail.com                         | true    | |
+   | AUTH_PASS| 发送方所在邮箱的密码               | password                              | true    | |
 3. 在`./vercel.json`文件下设置发送时间,注意`vercel`使用的是UTC时区,下面表示UTC时区每天1点发送,对应UTC+8时区的早上9点
 ```json
 {

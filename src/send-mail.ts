@@ -5,7 +5,8 @@ const nodemailer = require('nodemailer');
 
 let transporter = createTransporter();
 const fromEMail = getEnvironmentVariableWithErr("FROM_EMAIL");
-const toEmail = getEnvironmentVariableWithErr("TO_EMAIL");
+const toEmails = getEnvironmentVariableWithErr("TO_EMAIL");
+const toEmailArr = toEmails.split(",");
 const projectUrl = "https://github.com/ruleeeer/leetcode-daily-mailer";
 const htmlTemplate = `  <!DOCTYPE html>
             <html lang="en">
@@ -41,13 +42,17 @@ async function sendTodayQuestion() {
             const html = util.format(htmlTemplate, number, title, difficulty, translatedContent, titleSlug, titleSlug, projectUrl, projectUrl)
             const date = new Date();
             const currentDateStr = date.toISOString().slice(0, 10);
-            const mailOptions = {
-                from: fromEMail,
-                to: toEmail,
-                subject: `${currentDateStr} Leetcode每日一题: ${title}`,
-                html: html
-            };
-            return sendMail(transporter, mailOptions);
+            const promiseArr = [];
+            for (let toEmail of toEmailArr) {
+                const mailOptions = {
+                    from: fromEMail,
+                    to: toEmail,
+                    subject: `${currentDateStr} Leetcode每日一题: ${title}`,
+                    html: html
+                };
+                promiseArr.push(sendMail(transporter, mailOptions));
+            }
+            return Promise.allSettled(promiseArr);
         })
 
 }
@@ -57,8 +62,10 @@ function sendMail(transporter, mailOptions) {
     return new Promise((resolve, reject) => {
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
+                console.warn(`send email:{${mailOptions.subject}} from:{${mailOptions.from}} to:{${mailOptions.to}} failed!!`, error)
                 reject(error)
             } else {
+                console.log(`send email:{${mailOptions.subject}} from:{${mailOptions.from}} to:{${mailOptions.to}} success`)
                 resolve(mailOptions)
             }
         });
