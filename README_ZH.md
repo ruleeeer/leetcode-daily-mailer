@@ -5,7 +5,7 @@
 
 ## 快速开始
 1. 当前服务部署在`vercel`(无需付费)
-   ,你可以直接点击按扭部署自己的服务[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ruleeeer/leetcode-daily-mailer&env=FROM_EMAIL&env=TO_EMAIL&env=SMTP_EMAIL_HOST&env=SMTP_PORT&env=AUTH_USER&env=AUTH_USER&project-name=leetcode-daily-mailer&repository-name=leetcode-daily-mailer)
+   ,你可以直接点击按扭部署自己的服务[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ruleeeer/leetcode-daily-mailer&env=FROM_EMAIL&env=TO_EMAIL&env=SMTP_EMAIL_HOST&env=SMTP_PORT&env=AUTH_USER&env=AUTH_PASS&project-name=leetcode-daily-mailer&repository-name=leetcode-daily-mailer)
 2. 设置必须的环境变量
 
    | env_name       | desc                     | example                               | require | default |

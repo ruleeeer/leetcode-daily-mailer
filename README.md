@@ -4,7 +4,7 @@ A simple node program that automatically sends you the `leetcode` daily question
 ![img.png](picture/2023-06-12_20.18.06.png)
 ## Quick start
 1. The current service is deployed on `vercel` (no payment required)
-   You can deploy your own service directly by clicking on the button [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ruleeeer/leetcode-daily-mailer&env=FROM_EMAIL&env=TO_EMAIL&env=SMTP_EMAIL_HOST&env=SMTP_PORT&env=AUTH_USER&env=AUTH_USER&project-name=leetcode-daily-mailer&repository-name=leetcode-daily-mailer)
+   You can deploy your own service directly by clicking on the button [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ruleeeer/leetcode-daily-mailer&env=FROM_EMAIL&env=TO_EMAIL&env=SMTP_EMAIL_HOST&env=SMTP_PORT&env=AUTH_USER&env=AUTH_PASS&project-name=leetcode-daily-mailer&repository-name=leetcode-daily-mailer)
 2. Set the required environment variables
    | env_name | desc | example | require | default |
    | ----------------|--------------------------|---------------------------------------|---------|---------|
