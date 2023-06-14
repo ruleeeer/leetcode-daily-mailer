@@ -6,6 +6,7 @@
   "scripts": {},
   "files": [
     "dist",
+    "README_ZH.md",
     "README.md",
     "LICENSE",
     "CHANGELOG.md"
