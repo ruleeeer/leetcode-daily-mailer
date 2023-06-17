@@ -4,8 +4,16 @@ import * as util from "util";
 const nodemailer = require('nodemailer');
 
 let transporter = createTransporter();
-const fromEMail = getEnvironmentVariableWithErr("FROM_EMAIL");
-const toEmails = getEnvironmentVariableWithErr("TO_EMAIL");
+const fromEMail = getEnvWithErr("FROM_EMAIL");
+const toEmails = getEnvWithErr("TO_EMAIL");
+const language = getEnvWithDefault("EMAIL_LANGUAGE", "cn").toLowerCase()
+const i18n = require('i18n');
+i18n.configure({
+    locales: ['en', 'cn'],
+    directory: __dirname + '/locales',
+    defaultLocale: language
+});
+const __ = i18n.__;
 const toEmailArr = toEmails.split(",");
 const projectUrl = "https://github.com/ruleeeer/leetcode-daily-mailer";
 const htmlTemplate = `  <!DOCTYPE html>
@@ -15,10 +23,10 @@ const htmlTemplate = `  <!DOCTYPE html>
             </head>
             <body>
               <h4>%s：%s</h4>
-              <p>难度：%s</p>
+              <p>${__('difficulty')}：%s</p>
               <div>%s</div>
               <p>
-                原题链接：<a href="https://leetcode-cn.com/problems/%s">https://leetcode-cn.com/problems/%s</a>
+                ${__('question-link')}：<a href="https://leetcode-cn.com/problems/%s">https://leetcode-cn.com/problems/%s</a>
               </p>
               </br>
               </br>
@@ -35,11 +43,19 @@ async function sendTodayQuestion() {
             const {
                 titleSlug,
                 questionFrontendId: number,
-                translatedTitle: title,
-                difficulty,
-                translatedContent
+                difficulty
             } = todayQuestion;
-            const html = util.format(htmlTemplate, number, title, difficulty, translatedContent, titleSlug, titleSlug, projectUrl, projectUrl)
+            let title = '';
+            let content = '';
+            console.log(language)
+            if (language === 'cn') {
+                title = todayQuestion.translatedTitle;
+                content = todayQuestion.translatedContent;
+            } else {
+                title = todayQuestion.title;
+                content = todayQuestion.content;
+            }
+            const html = util.format(htmlTemplate, number, title, difficulty, content, titleSlug, titleSlug, projectUrl, projectUrl)
             const date = new Date();
             const currentDateStr = date.toISOString().slice(0, 10);
             const promiseArr = [];
@@ -47,7 +63,7 @@ async function sendTodayQuestion() {
                 const mailOptions = {
                     from: fromEMail,
                     to: toEmail,
-                    subject: `${currentDateStr} Leetcode每日一题: ${title}`,
+                    subject: `${currentDateStr} ${__('leetcode-daily-question')}: ${title}`,
                     html: html
                 };
                 promiseArr.push(sendMail(transporter, mailOptions));
@@ -74,10 +90,10 @@ function sendMail(transporter, mailOptions) {
 
 function createTransporter() {
 // read environment variables
-    const host = getEnvironmentVariableWithErr("SMTP_EMAIL_HOST");
-    const smtpPort = getEnvironmentVariableWithDefault("SMTP_PORT", "465")
-    const authUser = getEnvironmentVariableWithErr("AUTH_USER");
-    const authPass = getEnvironmentVariableWithErr("AUTH_PASS")
+    const host = getEnvWithErr("SMTP_EMAIL_HOST");
+    const smtpPort = getEnvWithDefault("SMTP_PORT", "465")
+    const authUser = getEnvWithErr("AUTH_USER");
+    const authPass = getEnvWithErr("AUTH_PASS")
 // 创建一个邮件传输对象
     return nodemailer.createTransport({
         host: host,
@@ -91,11 +107,11 @@ function createTransporter() {
 }
 
 
-function getEnvironmentVariableWithDefault(variable, defaultVal) {
+function getEnvWithDefault(variable, defaultVal) {
     return process.env[variable] ?? defaultVal;
 }
 
-function getEnvironmentVariableWithErr(variable) {
+function getEnvWithErr(variable) {
     let envVariable = process.env[variable];
     if (!envVariable) {
         throw new Error(`please set environment variable {${variable}}!!`)

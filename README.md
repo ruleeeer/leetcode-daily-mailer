@@ -1,13 +1,14 @@
 English | [简体中文](./README_ZH.md)
 # leetcode-daily-mailer
 A simple node program that automatically sends you the `leetcode` daily question every day, using [leetcode-daily-question](https://github.com/ruleeeer/leetcode-daily-question) to get the daily question, and [ nodemailer](https://www.npmjs.com/package/nodemailer) to send emails, the result is as follows
-![img.png](picture/2023-06-12_20.18.06.png)
+![img.png](picture/2023-06-17_16.54.12.png)
 ## Quick start
 1. The current service is deployed on `vercel` (no payment required)
    You can deploy your own service directly by clicking on the button [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ruleeeer/leetcode-daily-mailer&env=FROM_EMAIL&env=TO_EMAIL&env=SMTP_EMAIL_HOST&env=SMTP_PORT&env=AUTH_USER&env=AUTH_PASS&project-name=leetcode-daily-mailer&repository-name=leetcode-daily-mailer)
 2. Set the required environment variables
    | env_name | desc | example | require | default |
    | ----------------|--------------------------|---------------------------------------|---------|---------|
+   | EMAIL_LANGUAGE |Language of email content| en | false|cn|
    | FROM_EMAIL | email to send daily questions | send@mail.com | true |
    | TO_EMAIL | The email address to receive the daily question (multiple, separated by commas) | receiver1@mail.com,receiver2@mail.com | true |
    | SMTP_EMAIL_HOST| SMTP domain name of the sender's mailbox | smtp.gmail.com | true |

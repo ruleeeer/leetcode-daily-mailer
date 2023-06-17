@@ -10,6 +10,7 @@
 
    | env_name       | desc                     | example                               | require | default |
    |----------------|--------------------------|---------------------------------------|---------|---------|
+   | EMAIL_LANGUAGE | 邮件内容的语言                  | cn                                    | false|cn|
    | FROM_EMAIL     | 发送每日一题的邮箱                | send@mail.com                         | true    |         |
    | TO_EMAIL       | 接收每日一题的邮箱(支持多个,使用英文逗号分隔) | receiver1@mail.com,receiver2@mail.com | true    |         |
    | SMTP_EMAIL_HOST| 发送方所在邮箱的SMTP域名           | smtp.gmail.com                        | true    |         |
