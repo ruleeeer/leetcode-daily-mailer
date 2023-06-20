@@ -8,7 +8,7 @@ A simple node program that automatically sends you the `leetcode` daily question
 2. Set the required environment variables
    | env_name | desc | example | require | default |
    | ----------------|--------------------------|---------------------------------------|---------|---------|
-   | EMAIL_LANGUAGE |Language of email content| en | false|cn|
+   | EMAIL_LANGUAGE |Language of email content(`en` or `cn`)| en | false|cn|
    | FROM_EMAIL | email to send daily questions | send@mail.com | true |
    | TO_EMAIL | The email address to receive the daily question (multiple, separated by commas) | receiver1@mail.com,receiver2@mail.com | true |
    | SMTP_EMAIL_HOST| SMTP domain name of the sender's mailbox | smtp.gmail.com | true |

@@ -3,7 +3,7 @@ import * as util from "util";
 
 const nodemailer = require('nodemailer');
 
-let transporter = createTransporter();
+const transporter = createTransporter();
 const fromEMail = getEnvWithErr("FROM_EMAIL");
 const toEmails = getEnvWithErr("TO_EMAIL");
 const language = getEnvWithDefault("EMAIL_LANGUAGE", "cn").toLowerCase()
