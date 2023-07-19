@@ -47,7 +47,6 @@ async function sendTodayQuestion() {
             } = todayQuestion;
             let title = '';
             let content = '';
-            console.log(language)
             if (language === 'cn') {
                 title = todayQuestion.translatedTitle;
                 content = todayQuestion.translatedContent;
@@ -63,7 +62,7 @@ async function sendTodayQuestion() {
                 const mailOptions = {
                     from: fromEMail,
                     to: toEmail,
-                    subject: `${currentDateStr} ${__('leetcode-daily-question')}: ${title}`,
+                    subject: `${currentDateStr} ${__('leetcode-daily-question')}: ${title}(${difficulty})`,
                     html: html
                 };
                 promiseArr.push(sendMail(transporter, mailOptions));
